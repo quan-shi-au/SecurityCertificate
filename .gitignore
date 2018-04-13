@@ -1,2 +1,8 @@
 .vs/
 SslCertificate/obj/
+ClientCaller/bin/
+ClientCaller/obj/Debug/ClientCaller.csproj.FileListAbsolute.txt
+ClientCaller/obj/
+ClientCertTests/bin/
+ClientCertTests/obj/
+packages/
