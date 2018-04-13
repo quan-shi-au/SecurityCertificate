@@ -11,3 +11,5 @@ makecert.exe -ic RootCertificate.cer -iv RootCertificate.pvk -pe -sv localtestcl
 #package into pfx file
 
 pvk2pfx.exe -pvk localtestclientcert.pvk -spc localtestclientcert.cer -pfx localtestclientcert.pfx
+
+#Run mmc.exe as administrator
