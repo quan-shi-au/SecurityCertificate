@@ -1,0 +1,13 @@
+﻿# create a root certificate
+
+makecert.exe -r -n "CN=RootCertificate" -pe -sv RootCertificate.pvk -a sha1 -len 2048 -b 01/01/2015 -e 01/01/2030 -cy authority RootCertificate.cer
+
+pvk2pfx.exe -pvk RootCertificate.pvk -spc RootCertificate.cer -pfx RootCertificate.pfx
+
+# create a client certificate
+
+makecert.exe -ic RootCertificate.cer -iv RootCertificate.pvk -pe -sv localtestclientcert.pvk -a sha1 -n "CN=localtestclientcert" -len 2048 -b 01/01/2015 -e 01/01/2030 -sky exchange localtestclientcert.cer -eku 1.3.6.1.5.5.7.3.2
+
+#package into pfx file
+
+pvk2pfx.exe -pvk localtestclientcert.pvk -spc localtestclientcert.cer -pfx localtestclientcert.pfx
