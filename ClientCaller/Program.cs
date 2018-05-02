@@ -20,7 +20,7 @@ namespace ClientCaller
 
                 HttpClient client = new HttpClient(requestHandler)
                 {
-                    BaseAddress = new Uri("http://localhost:3020/")
+                    BaseAddress = new Uri("https://mylocalsite.local/")
                 };
 
                 HttpResponseMessage response = client.GetAsync("customers").Result;

@@ -19,3 +19,6 @@ makecert.exe -ic RootCertificate.cer -iv RootCertificate.pvk -pe -sv mylocalsite
 
 pvk2pfx.exe -pvk mylocalsite.local.pvk -spc mylocalsite.local.cer -pfx mylocalsite.local.pfx
 
+# import the certificate into IIS
+# Go to IIS | Select the server | Click Server Certificates  in right pane | select import in the action pane.
+
