@@ -6,3 +6,10 @@ ClientCaller/obj/
 ClientCertTests/bin/
 ClientCertTests/obj/
 packages/
+SslCertificate/bin/Debug/SslCertificate.exe
+SslCertificate/bin/Debug/RootCertificate.pfx
+ClientCertTests/ClientCertTests.csproj.user
+SslCertificate/bin/Debug/SslCertificate.pdb
+SslCertificate/SslCertificate.csproj.user
+SslCertificate/bin/Debug/RootCertificate.cer
+SslCertificate/bin/Debug/RootCertificate.pvk
