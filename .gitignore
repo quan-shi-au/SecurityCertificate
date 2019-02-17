@@ -13,3 +13,5 @@ SslCertificate/bin/Debug/SslCertificate.pdb
 SslCertificate/SslCertificate.csproj.user
 SslCertificate/bin/Debug/RootCertificate.cer
 SslCertificate/bin/Debug/RootCertificate.pvk
+VerifyClientCertificate/bin/
+VerifyClientCertificate/obj/

@@ -20,7 +20,7 @@ namespace ClientCaller
 
                 HttpClient client = new HttpClient(requestHandler)
                 {
-                    BaseAddress = new Uri("https://mylocalsite.local/")
+                    BaseAddress = new Uri("https://okapi.wontokone.com/v1/internal/notify-wontok/event/")
                 };
 
                 HttpResponseMessage response = client.GetAsync("customers").Result;
