@@ -17,7 +17,9 @@ namespace VerifyClientCertificate
 
         static void Main(string[] args)
         {
-            Console.WriteLine(Base64Decode(certString));
+            ValidateCertFromDisk();
+
+            //Console.WriteLine(Base64Decode(certString));
 
             // GetClientCertificateFromDisk();
 
@@ -134,6 +136,54 @@ namespace VerifyClientCertificate
             catch
             {
                 return false;
+            }
+        }
+
+        private static void ValidateCertFromDisk()
+        {
+            try
+            {
+
+                string Certificate = "Telstra_ClientCertificate.cer";
+
+                X509Certificate2 cert = new X509Certificate2();
+
+                cert.Import(Certificate);
+
+
+                X509Chain chain = new X509Chain();
+                X509ChainPolicy chainPolicy = new X509ChainPolicy()
+                {
+                    //RevocationMode = X509RevocationMode.NoCheck,
+                    //RevocationFlag = X509RevocationFlag.EntireChain
+                };
+                chain.ChainPolicy = chainPolicy;
+                if (!chain.Build(cert))
+                {
+                    foreach (X509ChainElement chainElement in chain.ChainElements)
+                    {
+                        foreach (X509ChainStatus chainStatus in chainElement.ChainElementStatus)
+                        {
+                            Console.WriteLine(chainStatus);
+                        }
+                    }
+                }
+
+
+                X509CertificateValidator chainTrustValidator = X509CertificateValidator.ChainTrust;
+                try
+                {
+                    chainTrustValidator.Validate(cert);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+
+                }
+            }
+            finally
+            {
             }
         }
 
