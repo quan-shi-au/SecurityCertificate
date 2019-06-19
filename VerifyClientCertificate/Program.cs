@@ -16,7 +16,7 @@ namespace VerifyClientCertificate
         private const string CERT_FILE_NAME = @"parental-controls.api.telstra.com.cer";
         private const string CERT_COMMON_NAME = "parental-controls.api.telstra.com";
 
-        static void Main(string[] args)
+        static void Main1(string[] args)
         {
             EncryptDataOaepSha1();
 
