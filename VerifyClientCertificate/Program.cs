@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Selectors;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace VerifyClientCertificate
 
         static void Main(string[] args)
         {
+            EncryptDataOaepSha1();
+
             ValidateCertFromDisk();
 
             //Console.WriteLine(Base64Decode(certString));
@@ -64,9 +67,7 @@ namespace VerifyClientCertificate
         private static X509Certificate2 GetClientCertificateFromDisk()
         {
             string Certificate = CERT_FILE_NAME;
-
             X509Certificate2 cert = new X509Certificate2();
-
             cert.Import(Certificate);
 
             var exported = cert.Export(X509ContentType.Pfx, "w0nt0k");
@@ -240,6 +241,56 @@ namespace VerifyClientCertificate
 
 
         private const string certString = "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";
+
+        public static void EncryptDataOaepSha1()
+        {
+            var data = System.Text.Encoding.UTF8.GetBytes("decode me");
+
+            //X509Certificate2 cert = new X509Certificate2();
+            //cert.Import("ga_wontokone_com.crt");
+
+            X509Certificate2Collection collection = new X509Certificate2Collection();
+            collection.Import("ga.wontokone.com.pfx", "w0nt0k", X509KeyStorageFlags.PersistKeySet);
+
+            //X509Certificate2 cert = new X509Certificate2("ga.wontokone.com.pfx", "w0nt0k");
+
+            X509Certificate2 cert = new X509Certificate2(@"D:\Keys\SSL Certificates\ga.wontokone.com\ga.wontokone.com.pfx", "w0nt0k");
+        
+
+
+            // GetRSAPublicKey returns an object with an independent lifetime, so it should be
+            // handled via a using statement.
+            using (RSA rsa = cert.GetRSAPublicKey())
+            {
+                // OAEP allows for multiple hashing algorithms, what was formermly just "OAEP" is
+                // now OAEP-SHA1.
+                data = rsa.Encrypt(data, RSAEncryptionPadding.OaepSHA1);
+            }
+
+            var dataBase64 = Convert.ToBase64String(data);
+            data = System.Convert.FromBase64String(dataBase64);
+
+            // need admin permission. run visual studio as "Administrator"
+            using (RSA rsa = cert.GetRSAPrivateKey())
+            {
+                data = rsa.Decrypt(data, RSAEncryptionPadding.OaepSHA1);
+            }
+
+            var decrypted = System.Text.Encoding.UTF8.GetString(data);
+
+
+        }
+
+
+        public static byte[] DecryptDataOaepSha1(X509Certificate2 cert, byte[] data)
+        {
+            // GetRSAPrivateKey returns an object with an independent lifetime, so it should be
+            // handled via a using statement.
+            using (RSA rsa = cert.GetRSAPrivateKey())
+            {
+                return rsa.Decrypt(data, RSAEncryptionPadding.OaepSHA1);
+            }
+        }
 
 
 
